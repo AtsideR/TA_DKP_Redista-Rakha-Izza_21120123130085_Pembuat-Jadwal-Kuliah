@@ -4,7 +4,7 @@ from tkinter.ttk import Combobox
 import pandas as pd
 
 class jadwalkuliah:
-    # konstruktor untuk class
+    #
     def __init__(self, master):
         self.master = master
         self.master.title("Pembuat Jadwal Kuliah")
@@ -17,7 +17,7 @@ class jadwalkuliah:
         self.set_theme()
         self.buat_widgets()
 
-    # metode untuk mengatur tema
+    # function untuk mengatur tema
     def set_theme(self):
         if self.mode_gelap:
             self.bg_color = "#2c3e50"
@@ -39,10 +39,10 @@ class jadwalkuliah:
         
         # grid = untuk mengatur lokasi tool pada program
         # label = untuk menuliskan kata yang akan muncul di program
-        # optionmenu = untuk membuat tombol list pada program
+        # combobox = untuk membuat tombol list pada program
         # button = untuk membuat tombol di program
         for i, hari in enumerate(self.hari):
-            label1 = tk.Label(self.master, text=f"Jadwal {hari}:", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12, "bold"))
+            label1 = tk.Label(self.master, text=f"Jadwal {hari}", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12, "bold"))
             label1.grid(row=1, column=i, padx=5, pady=5, sticky="nsew")
             text_area = tk.Text(self.master, height=25, width=20, state="disabled", bg=self.text_area_color, fg=self.fg_color, font=("Arial", 10))
             text_area.grid(row=2, column=i, padx=5, pady=5, sticky="nsew")
@@ -51,9 +51,6 @@ class jadwalkuliah:
         label2 = tk.Label(self.master, text="PEMBUAT JADWAL", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12, "bold"))
         label2.grid(row=0, column=len(self.hari)//2, padx=5, pady=5, sticky="nsew")
         
-        label3 = tk.Label(self.master, text="Nama : Redista Rakha Izza \n NIM : 21120123130085", bg=self.bg_color, fg=self.fg_color, font=("Arial", 11, "bold"))
-        label3.grid(row=11, column=0, padx=5, pady=5, sticky="nsew")
-
         tk.Label(self.master, text="Pilih Hari:", bg=self.bg_color, fg=self.fg_color, font=("Arial", 10)).grid(row=5, column=0, padx=5, pady=5, sticky="e")
         self.menu_hari = Combobox(self.master, height= 5, width= 8, textvariable=self.selected_day, values=self.hari, font=("Arial", 10), state= "readonly")
         self.menu_hari.grid(row=5, column=1, padx=5, pady=5, sticky="w")
@@ -98,7 +95,7 @@ class jadwalkuliah:
             self.master.columnconfigure(i, weight=1)
         self.master.rowconfigure((0, 1), weight=1)
 
-    # method buat nambahin acara di textarea
+    # function buat nambahin acara di textarea
     def tambah_acara(self):
         hari = self.selected_day.get()
         acara = self.acara_entry.get()
@@ -130,7 +127,7 @@ class jadwalkuliah:
         else:
             messagebox.showerror("Error", "Silakan isi semua kolom.")
 
-    # metode untuk memasukan jadwal di textarea
+    # function untuk memasukan jadwal di textarea
     def perbarui_jadwal(self):
         for hari, text_area in self.text_area_hari.items():
             text_area.config(state="normal")
@@ -144,18 +141,6 @@ class jadwalkuliah:
         self.mode_gelap = not self.mode_gelap
         self.set_theme()
         self.buat_widgets()
-
-    # Metode untuk memperbarui gaya widget
-    def update_widgets(self):
-        for widget in self.master.winfo_children():
-            if isinstance(widget, tk.Label):
-                widget.config(bg=self.bg_color, fg=self.fg_color)
-            elif isinstance(widget, tk.Button):
-                widget.config(bg=self.btn_color, fg=self.fg_color)
-            elif isinstance(widget, tk.Text):
-                widget.config(bg=self.text_area_color, fg=self.fg_color)
-            elif isinstance(widget, tk.Entry):
-                widget.config(bg=self.bg_color, fg=self.fg_color)
 
     # method untuk membuat penghapus jadwal  
     def pilih_hari_hapus(self):
